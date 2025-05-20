@@ -1,0 +1,74 @@
+.custom-content {
+  --background: linear-gradient(to bottom right, #ffe259, #ffa751); // Gradiente Pokédex
+  min-height: 100%;
+}
+
+.pokemon-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.custom-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 10px;
+}
+
+.pokemon-img {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  height: auto;
+}
+
+.pokemon-name {
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #d62828;
+}
+
+.data-list ion-item {
+  font-size: 1rem;
+  color: #333;
+}
+
+ion-chip {
+  margin: 4px 4px 8px 0;
+  font-size: 0.9em;
+}
+
+.stat-list {
+  padding-left: 16px;
+  font-size: 0.95rem;
+  margin-top: 6px;
+  color: #555;
+}
+
+.guardar-btn {
+  margin-top: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.animate-fade {
+  animation: fadeIn 0.7s ease-in-out both;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
