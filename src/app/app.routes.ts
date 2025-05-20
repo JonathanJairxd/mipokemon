@@ -5,5 +5,10 @@ export const routes: Routes = [
   {
     path:'',
     component:HomePage,
+  },
+  {
+    path: 'pokemon/:name',
+    loadComponent: () => import('./pokemon/pokemon.page').then( m => m.PokemonPage)
   }
+
 ];
