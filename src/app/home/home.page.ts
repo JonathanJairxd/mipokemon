@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomePage implements OnInit {
   limit = 20;
   loading = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.loadPokemons();
@@ -33,18 +34,37 @@ export class HomePage implements OnInit {
         this.offset += this.limit;
         this.loading = false;
 
+        this.pokemons.forEach((pokemon) => {
+          this.http.get<any>(pokemon.url).subscribe((details) => {
+            pokemon.details = details;
+          });
+        });
+
         if (event) {
           event.target.complete();
         }
 
-        // Disable scroll if no more Pokémon
         if (res.next === null && event) {
           event.target.disabled = true;
         }
       });
   }
 
-  getImageUrl(index: number): string {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`;
+  getPokemonTypes(pokemon: any): string {
+    return pokemon.details?.types?.map((t: any) => t.type.name).join(', ');
+  }
+
+  getPokemonIdFromUrl(url: string): number {
+    const parts = url.split('/');
+    return Number(parts[parts.length - 2]);
+  }
+
+  getImageUrl(pokemon: any): string {
+    const id = this.getPokemonIdFromUrl(pokemon.url);
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+  }
+
+  goToDetails(pokemonName: string) {
+    this.router.navigate([`/pokemon/${pokemonName}`]);
   }
 }

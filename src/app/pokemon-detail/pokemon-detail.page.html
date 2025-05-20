@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ pokemonName | titlecase }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="pokemonDetails">
+    <img [src]="pokemonDetails?.sprites?.front_default" alt="{{ pokemonName }}" />
+    <p><strong>Type:</strong> {{ getTypes() }}</p>
+    <p><strong>Height:</strong> {{ pokemonDetails?.height }}</p>
+    <p><strong>Weight:</strong> {{ pokemonDetails?.weight }}</p>
+    <p><strong>Abilities:</strong> {{ getAbilities() }}</p>
+  </div>
+</ion-content>
