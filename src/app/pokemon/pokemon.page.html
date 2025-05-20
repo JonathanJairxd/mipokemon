@@ -6,7 +6,7 @@
 
 <ion-content class="ion-padding" *ngIf="pokemon">
   <ion-card>
-    <img [src]="pokemon.sprites?.front_default" alt="Imagen de {{ pokemon.name }}"/>
+    <img [src]="pokemon.sprites?.front_default" alt="Imagen de {{ pokemon.name }}" />
     <ion-card-header>
       <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
     </ion-card-header>
@@ -14,7 +14,35 @@
     <ion-card-content>
       <p><strong>Altura:</strong> {{ pokemon.height }}</p>
       <p><strong>Peso:</strong> {{ pokemon.weight }}</p>
-      
+      <p><strong>ID:</strong> {{ pokemon.id }}</p>
+      <p><strong>Experiencia base:</strong> {{ pokemon.base_experience }}</p>
+
+      <p><strong>Tipos:</strong>
+        <span *ngFor="let tipo of pokemon.types; let i = index">
+          {{ tipo.type.name }}<span *ngIf="i < pokemon.types.length - 1">, </span>
+        </span>
+      </p>
+
+      <p><strong>Habilidades:</strong>
+        <span *ngFor="let habilidad of pokemon.abilities; let i = index">
+          {{ habilidad.ability.name }}<span *ngIf="i < pokemon.abilities.length - 1">, </span>
+        </span>
+      </p>
+
+      <p><strong>Estadísticas:</strong></p>
+      <ul>
+        <li *ngFor="let stat of pokemon.stats">
+          {{ stat.stat.name }}: {{ stat.base_stat }}
+        </li>
+      </ul>
+
+      <p><strong>Movimientos:</strong></p>
+      <ul>
+        <li *ngFor="let move of pokemon.moves.slice(0, 5)">
+          {{ move.move.name }}
+        </li>
+      </ul>
+
 
       <ion-item>
         <ion-label position="stacked">Tu reseña</ion-label>
