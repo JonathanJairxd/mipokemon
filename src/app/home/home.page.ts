@@ -50,6 +50,6 @@ export class HomePage implements OnInit {
   }
 
   verDetalle(nombre: string) {
-    this.router.navigate(['/pokemon', nombre]);
+    this.router.navigate(['/pokemon'], { queryParams: { nombre } });
   }
 }

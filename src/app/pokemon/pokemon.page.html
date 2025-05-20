@@ -1,39 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ pokemon?.name | titlecase }}</ion-title>
+    <ion-title>Detalles de {{ pokemon?.name | titlecase }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="pokemon">
+<ion-content class="ion-padding" *ngIf="pokemon">
   <ion-card>
-    <img [src]="pokemon.sprites?.front_default" alt="imagen" />
-
+    <img [src]="pokemon.sprites?.front_default" alt="Imagen de {{ pokemon.name }}"/>
     <ion-card-header>
       <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <p><strong>Altura:</strong> {{ pokemon.height / 10 }} m</p>
-      <p><strong>Peso:</strong> {{ pokemon.weight / 10 }} kg</p>
+      <p><strong>Altura:</strong> {{ pokemon.height }}</p>
+      <p><strong>Peso:</strong> {{ pokemon.weight }}</p>
+      
 
-      <p><strong>Tipos:</strong>
-        <span *ngFor="let tipo of pokemon.types; let last = last">
-          {{ tipo.type.name }}<span *ngIf="!last">, </span>
-        </span>
-      </p>
+      <ion-item>
+        <ion-label position="stacked">Tu reseña</ion-label>
+        <ion-textarea [(ngModel)]="resena"></ion-textarea>
+      </ion-item>
 
-      <p><strong>Habilidades:</strong>
-        <span *ngFor="let habilidad of pokemon.abilities; let last = last">
-          {{ habilidad.ability.name }}<span *ngIf="!last">, </span>
-        </span>
-      </p>
-
-      <p><strong>Estadísticas:</strong></p>
-      <ul>
-        <li *ngFor="let stat of pokemon.stats">
-          {{ stat.stat.name }}: {{ stat.base_stat }}
-        </li>
-      </ul>
+      <ion-button expand="block" (click)="guardar()">Guardar en Firebase</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
